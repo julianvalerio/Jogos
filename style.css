@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== CARROSSEL ===== */
+.swiper {
+    width: 100%;
+    padding-bottom: 2em; /* espaço para a paginação */
+}
+
+/* Correção: "width: 10%" espremia o wrapper. O Swiper controla a largura sozinho. */
+.swiper-wrapper {
+    height: 35em;
+    align-items: center;
+}
+
+.card {
+    width: 20em;
+    height: 90%;
+    background-color: #fff;
+    border-radius: 2em;
+    box-shadow: 0 0 2em rgba(0, 0, 0, .2);
+    padding: 2em 1em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 2em;
+}
+
+.swiper-slide:not(.swiper-slide-active) {
+    filter: blur(1px);
+}
+
+.swiper-pagination-bullet-active {
+    background: #9176ff;
+}
+
+.card_image {
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    border: 5px solid #9176ff;
+    padding: 3px;
+    margin-bottom: 2em;
+}
+
+/* Correção: "height: 100" estava sem unidade (inválido, era ignorado) */
+.card_image img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card_content { display: flex; align-items: center; flex-direction: column; }
+
+.card_title { font-size: 1.5em; font-weight: 500; position: relative; top: .2em; }
+
+.card_name { color: #9176ff; }
+
+.card_text { text-align: center; font-size: 1.1em; margin: 1em 0; }
+
+.card_btn {
+    background-color: #9176ff;
+    color: #fff;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: none;
+    padding: .5em 1.2em;
+    border-radius: .5em;
+    margin-top: .5em;
+    cursor: pointer;
+}
+
+.card_btn:hover { background-color: #7a5ef0; }
+
+/* ===== MODAIS (mesma classe para os três jogos) ===== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    padding: 16px;
+}
+
+.modal.aberto { display: flex; }
+
+.modal-content {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+}
+
+.modal-content p { margin-top: 10px; }
+
+.modal-close {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    border: none;
+    background: none;
+    font-size: 1.8em;
+    line-height: 1;
+    cursor: pointer;
+    color: #555;
+}
+
+.modal-btn {
+    margin-top: 10px;
+    background-color: #9176ff;
+    color: #fff;
+    border: none;
+    padding: .5em 1.2em;
+    border-radius: .5em;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dica { font-size: .85em; color: #666; }
+
+/* ===== JOGO DA VELHA ===== */
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+    gap: 5px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.cell {
+    width: 80px;
+    height: 80px;
+    font-size: 2em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #333;
+    cursor: pointer;
+    user-select: none;
+}
+
+.cell.x { color: #1ea7e0; }
+.cell.o { color: #e9414b; }
+.cell.vencedora { background: #e6ffe9; }
+
+/* ===== SNAKE ===== */
+canvas {
+    display: block;
+    margin: 10px auto 0;
+    background: #f2f2f2;
+    border: 2px solid #333;
+    max-width: 100%;   /* encolhe em telas pequenas */
+    height: auto;
+}
+
+/* ===== MEMÓRIA ===== */
+#memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 70px);
+    gap: 8px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.carta {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    perspective: 600px;
+}
+
+.carta span {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-size: 2em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: transform .4s;
+}
+
+.carta .frente { background: #9176ff; color: #fff; font-weight: bold; }
+.carta .verso  { background: #fff; border: 2px solid #9176ff; transform: rotateY(180deg); }
+
+.carta.virada .frente,
+.carta.encontrada .frente { transform: rotateY(180deg); }
+
+.carta.virada .verso,
+.carta.encontrada .verso { transform: rotateY(360deg); }
+
+.carta.encontrada { cursor: default; }
+.carta.encontrada .verso { background: #e6ffe9; border-color: #2e9d4f; }

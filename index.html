@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos</title>
+    <!-- Versão fixada: sem número de versão o CDN pode trocar a biblioteca sem aviso -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <!-- Os cards aparecem duplicados porque o loop do Swiper com slidesPerView "auto"
+                 precisa de slides suficientes para preencher a tela -->
+            <div class="card swiper-slide">
+                <div class="card_image">
+                    <img src="imagens/snake.png" alt="Snake">
+                </div>
+                <div class="card_content">
+                    <span class="card_title">Snake</span>
+                    <p class="card_text">Jogo da cobrinha</p>
+                    <button class="card_btn" onclick="openModalSnake()">Jogar</button>
+                </div>
+            </div>
+
+            <div class="card swiper-slide">
+                <div class="card_image">
+                    <img src="imagens/tictac.png" alt="Jogo da Velha">
+                </div>
+                <div class="card_content">
+                    <span class="card_title">Tic Tac Toe</span>
+                    <p class="card_text">Jogo da velha</p>
+                    <button class="card_btn" onclick="openModal()">Jogar</button>
+                </div>
+            </div>
+
+            <div class="card swiper-slide">
+                <div class="card_image">
+                    <img src="imagens/memoria.png" alt="Jogo da memória">
+                </div>
+                <div class="card_content">
+                    <span class="card_title">Memória</span>
+                    <p class="card_text">Jogo da memória</p>
+                    <button class="card_btn" onclick="openModalMemoria()">Jogar</button>
+                </div>
+            </div>
+
+            <div class="card swiper-slide">
+                <div class="card_image">
+                    <img src="imagens/snake.png" alt="Snake">
+                </div>
+                <div class="card_content">
+                    <span class="card_title">Snake</span>
+                    <p class="card_text">Jogo da cobrinha</p>
+                    <button class="card_btn" onclick="openModalSnake()">Jogar</button>
+                </div>
+            </div>
+
+            <div class="card swiper-slide">
+                <div class="card_image">
+                    <img src="imagens/tictac.png" alt="Jogo da Velha">
+                </div>
+                <div class="card_content">
+                    <span class="card_title">Tic Tac Toe</span>
+                    <p class="card_text">Jogo da velha</p>
+                    <button class="card_btn" onclick="openModal()">Jogar</button>
+                </div>
+            </div>
+
+            <div class="card swiper-slide">
+                <div class="card_image">
+                    <img src="imagens/memoria.png" alt="Jogo da memória">
+                </div>
+                <div class="card_content">
+                    <span class="card_title">Memória</span>
+                    <p class="card_text">Jogo da memória</p>
+                    <button class="card_btn" onclick="openModalMemoria()">Jogar</button>
+                </div>
+            </div>
+        </div>
+        <!-- Elemento exigido pela opção "pagination" do jogos.js (antes não existia) -->
+        <div class="swiper-pagination"></div>
+    </section>
+
+    <!-- MODAL: JOGO DA VELHA -->
+    <div class="modal" id="modal" onclick="closeModal(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()" aria-label="Fechar">&times;</button>
+            <h3>Jogo da Velha</h3>
+            <div id="board"></div>
+            <p id="status"></p>
+            <button class="modal-btn" onclick="reset()">Reiniciar</button>
+        </div>
+    </div>
+
+    <!-- MODAL: SNAKE -->
+    <div class="modal" id="modal-snake" onclick="closeModalSnake(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModalSnake()" aria-label="Fechar">&times;</button>
+            <h3>Snake</h3>
+            <canvas id="game" width="400" height="400"></canvas>
+            <p id="status-snake"></p>
+            <p class="dica">Use as setas ou W A S D. Espaço reinicia após o fim de jogo.</p>
+            <button class="modal-btn" onclick="startGame()">Reiniciar</button>
+        </div>
+    </div>
+
+    <!-- MODAL: MEMÓRIA -->
+    <div class="modal" id="modal-memoria" onclick="closeModalMemoria(event)">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModalMemoria()" aria-label="Fechar">&times;</button>
+            <h3>Jogo da Memória</h3>
+            <div id="memory-board"></div>
+            <p id="status-memoria"></p>
+            <button class="modal-btn" onclick="iniciarMemoria()">Reiniciar</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="jogos.js"></script>
+    <script src="velha.js"></script>
+    <script src="snake.js"></script>
+    <script src="memoria.js"></script>
+</body>
+</html>
